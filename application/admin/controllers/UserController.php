@@ -18,7 +18,15 @@ class UserController extends Controller
         $this->_view->Items= $this->_model->listItems();
         $this->_view->render('user\index');
     }
-
+    public function formAction(){
+        $this->_view->_title = "User manager::new";
+        $this->_view->Items = $this->_model->listItems();
+        $this->_view->render('user\form');
+    }
+    //ACTION : create new user
+    public function addNewAction(){
+        
+    }
     // ACTION : AJAX STATUS
     public function ajaxStatusAction(){
         $result = $this->_model->changeStatus($this->_arrParam,array('task'=> 'change-ajax-status'));
@@ -32,6 +40,9 @@ class UserController extends Controller
 
     //ACTION : TRASH ACTION 
     public function trashAction(){
-        echo '<h3>'. __METHOD__ .'</h3>';
+        $this->_model->deleteItem($this->_arrParam);
+        echo 321;
+        
     }
+    
 }

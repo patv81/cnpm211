@@ -29,7 +29,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-6 mb-1 text-right">
-                            <div class="input-group">
+                            <form class="input-group" id="search-filter-form">
                                 <div class="input-group-prepend input-group-sm">
                                     <select class="custom-select select-search-field" style="width: unset">
                                         <option value="all">Search by All</option>
@@ -42,7 +42,7 @@
                                     <button type="button" class="btn btn-sm btn-danger" id="btn-clear-search">Clear</button>
                                     <button type="button" class="btn btn-sm btn-info" id="btn-search">Search</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -58,28 +58,7 @@
                 </div>
                 <div class="card-body">
                     <!-- Control -->
-
-                    <div class="d-flex flex-wrap align-items-center justify-content-between mb-2">
-                        <div class="mb-1">
-                            <select id="bulk-action" name="bulk-action" class="custom-select custom-select-sm mr-1" style="width: unset">
-                                <option value="" selected="">Bulk Action</option>
-                                <option value="multi-delete">Multi Delete</option>
-                                <option value="multi-active">Multi Active</option>
-                                <option value="multi-inactive">Multi Inactive</option>
-                            </select> <button id="bulk-apply" class="btn btn-sm btn-info">Apply <span class="badge badge-pill badge-danger navbar-badge" style="display: none"></span></button>
-                        </div>
-                        <div class="mb-1">
-                            <select id="filter_groupacp" name="filter_groupacp" class="custom-select custom-select-sm mr-1" style="width: unset">
-                                <option value="default" selected="">- Group ACP -</option>
-                                <option value="false">No</option>
-                                <option value="true">Yes</option>
-                            </select>
-                        </div>
-                        <div class="mb-1">
-                            <a href="form.php" class="btn btn-sm btn-info"><i class="fas fa-plus"></i> Add New</a>
-                            <a href="#" class="btn btn-sm btn-info"><i class="fas fa-sync"></i> Reload</a>
-                        </div>
-                    </div>
+                        <?php include_once 'toolbar/toolbar.php';?>
                     <!-- List Content -->
                     <form action="" method="post" class="table-responsive" id="form-table">
                         <table class="table table-bordered table-hover text-nowrap btn-table mb-0">

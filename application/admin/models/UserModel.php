@@ -51,4 +51,12 @@ class UserModel extends Model
             } 
         }
     }
+    public function deleteItem($arrParam,$option=null){
+        if (!empty($arrParam['cid'])){
+            $ids = $this->createWhereDeleteSQL($arrParam['cid']);
+            $query = "DELETE FROM `$this->table` WHERE `id` IN ($ids)"; //
+            $this->query($query);
+        }
+    }
+    
 }

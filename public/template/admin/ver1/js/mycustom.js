@@ -38,7 +38,10 @@ function bulkAction(){
         }, 'json');
         
     } else if (type == 'multi-delete'){
-        alert("chua hien thuc");
+        var senddata = {cid: selected };
+        $.post('index.php?module=admin&controller=user&action=trash', senddata, function (data) {
+            location.reload();
+        }, 'json');
     }
     
 }
@@ -50,4 +53,15 @@ $(document).ready(function(){
         })
     })
     $('#bulk-apply').click(bulkAction);
+
+    
+    let $btnSearch = $('button#btn-search');
+    let $btnClearSearch = $('button#btn-clear-search');
+    let $inputSearchValue = $('input[name = search_value]');
+    $btnSearch.click(function(){
+        alert(123);
+    })
+    $btnClearSearch.click(function () {
+        $inputSearchValue.val('');
+    });
 })
