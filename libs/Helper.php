@@ -49,5 +49,17 @@ class Helper{
         $xhtml .= '</select>';
         return $xhtml;
     }
+    public static function cmsButton($name, $link, $class,$type='new')
+    {
+
+        $xhtml  = '';
+        if ($type == 'new') {
+            $xhtml = '<a href="' . $link . '" class="' . $class . '"> ' . $name . '</a>';
+        } else if ($type == 'submit') {
+            $xhtml = '<a  onclick="javascript:submitForm(\'' . $link . '\');" class="' . $class . '"> ' . $name . '</a>';
+        }
+        return $xhtml;
+
+    }
  }
 ?>

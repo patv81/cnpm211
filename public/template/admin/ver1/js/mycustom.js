@@ -1,3 +1,8 @@
+function submitForm(url) {
+    $('#admin-form').attr('action', url);
+    $('#admin-form').submit();
+}
+
 function changeStatus(url){
     $.get(url,function(data){
         //data 

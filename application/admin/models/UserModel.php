@@ -1,6 +1,7 @@
 <?php
 class UserModel extends Model
 {
+    protected $_columns=['id','username','email','fullname','password','created','created_by','modified','modified_by','status','ordering','group_id'];
     protected $_tableName = 'user';
     public function __construct()
     {
@@ -56,6 +57,16 @@ class UserModel extends Model
             $ids = $this->createWhereDeleteSQL($arrParam['cid']);
             $query = "DELETE FROM `$this->table` WHERE `id` IN ($ids)"; //
             $this->query($query);
+        }
+    }
+    public function saveItem($arrParam, $option = null){
+        if ($option['task'] == 'add') {
+            $arrParam['form']['created']    = date('Y-m-d', time());
+            $arrParam['form']['created_by']    = 1;
+            $data    = array_intersect_key($arrParam['form'], array_flip($this->_columns));
+            $this->insert($data);
+            Session::set('message', array('class' => 'success', 'content' => 'Dữ liệu được lưu thành công!'));
+            return $this->lastID();
         }
     }
     
