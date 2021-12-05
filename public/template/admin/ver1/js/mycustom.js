@@ -20,7 +20,11 @@ function changeStatus(url){
         $(element).attr('href',"javascript:changeStatus('"+data['link']+"')");
     },"json");
 }
-
+function trashSingle(url){
+    $.get(url,function(data){
+        location.reload();
+    })
+}
 function bulkAction(){
     var selected = [];
     var type = '';

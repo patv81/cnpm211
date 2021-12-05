@@ -62,11 +62,19 @@ class Validate{
 					case 'string':
 						$this->validateString($element, $value['options']['min'], $value['options']['max']);
 						break;
+					case 'string-notExistRecord':
+						$this->validateString($element, $value['options']['min'], $value['options']['max']);
+						$this->validateNotExistRecord($element, $value['options']);
+						break;
 					case 'url':
 						$this->validateUrl($element);
 						break;
 					case 'email':
 						$this->validateEmail($element);
+						break;
+					case 'email-notExistRecord':
+						$this->validateEmail($element);
+						$this->validateNotExistRecord($element, $value['options']);
 						break;
 					case 'status':
 						$this->validateStatus($element, $value['options']);
@@ -76,6 +84,9 @@ class Validate{
 						break;
 					case 'password':
 						$this->validatePassword($element, $value['options']);
+						break;
+					case 'simplepassword':
+						$this->validateSimplePassword($element, $value['options']);
 						break;
 					case 'date':
 						$this->validateDate($element, $value['options']['start'], $value['options']['end']);
@@ -177,7 +188,12 @@ class Validate{
 		}
 		
 	}
-	
+	private function validateSimplePassword($element, $options)
+	{
+		if ($options['action'] == 'add' || ($options['action'] == 'edit' && $this->source[$element])) {
+			$this->validateString($element, $options['min'],$options['max']);
+		}
+	}
 	// Validate Date
 	private function validateDate($element, $start, $end){		
 		// Start
@@ -204,6 +220,16 @@ class Validate{
 		$query	  = $options['query'];
 		if($database->isExist($query)==false){
 			$this->setError($element, 'record is not exist');
+		}
+	}
+	// Validate NOT Exist record
+	private function validateNotExistRecord($element, $options)
+	{
+		$database = $options['database'];
+
+		$query	  = $options['query'];
+		if ($database->isExist($query) == true) {
+			$this->setError($element, 'record is exist');
 		}
 	}
 	

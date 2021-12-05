@@ -12,11 +12,15 @@
     <div class="wrapper">
 
         <!-- Navbar -->
-        <?php require_once 'html/navbar.php'; ?>
+        <?php 
+        // require_once 'html/navbar.php'; 
+        ?>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <?php require_once 'html/sidebar.php'; ?>
+        <?php 
+        // require_once 'html/sidebar.php'; 
+        ?>
 
         <!-- Content Wrapper. Contains page content -->
         <!--  LOAD CONTENT -->

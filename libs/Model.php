@@ -55,7 +55,6 @@ class Model{
 		if($type == 'single'){
 			$newQuery 	= $this->createInsertSQL($data);
 			$query 		= "INSERT INTO `$this->table`(".$newQuery['cols'].") VALUES (".$newQuery['vals'].")";
-
 			$this->query($query);
 		}else{
 			foreach($data as $value){
@@ -94,9 +93,11 @@ class Model{
 	
 	// UPDATE
 	public function update($data, $where){
+
 		$newSet 	= $this->createUpdateSQL($data);
 		$newWhere 	= $this->createWhereUpdateSQL($where);
 		$query = "UPDATE `$this->table` SET " . $newSet . " WHERE $newWhere";
+		echo $query;
 		$this->query($query);
 		return $this->affectedRows();
 	}
@@ -115,11 +116,11 @@ class Model{
 	
 	// CREATE WHERE UPDATE SQL
 	public function createWhereUpdateSQL($data){
-		$newWhere = '';
+		$newWhere = [];
 		if(!empty($data)){
 			foreach($data as $value){
 				$newWhere[] = "`$value[0]` = '$value[1]'";
-				$newWhere[] = $value[2];
+				$newWhere[] = $value[2]??'';
 			}
 			$newWhere = implode(" ", $newWhere);
 		}

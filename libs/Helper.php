@@ -12,6 +12,21 @@ class Helper{
                     </a>';
     return $xhtml;
     }
+    public static function cmsBtnAction($type, $link)
+    {
+        $xhtml ='';
+        if ($type == 'delete'){
+            $xhtml='<a href="javascript:trashSingle(\''.$link.'\')" class="rounded-circle btn btn-sm btn-danger" title="delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>';
+        }
+        else if ($type =='edit'){
+            $xhtml.= '<a href="'.$link.'" class="rounded-circle btn btn-sm btn-info" title="edit">
+                            <i class="fas fa-pencil-alt"></i>
+                      </a>';
+        }
+        return $xhtml;
+    }
     public static function cmsCheckBox($id){
         $xhtml= '                                     
         <div class="custom-control custom-checkbox">
@@ -20,8 +35,8 @@ class Helper{
         </div>';
         return  $xhtml;
     }
-    public static function cmsInput($type,$name,$id,$value,$class){
-        $xhtml= '<input type="'.$type.'" id="'.$id.'" name="'.$name.'" value="'.$value.'" class="'.$class.'">';
+    public static function cmsInput($type,$name,$id,$value,$class,$option=''){
+        $xhtml= '<input '.$option.' type="'.$type.'" id="'.$id.'" name="'.$name.'" value="'.$value.'" class="'.$class.'">';
         
         return $xhtml;
     }

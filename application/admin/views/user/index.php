@@ -1,3 +1,8 @@
+<?php require_once 'toolbar/navbar.php'; ?>
+<!-- /.navbar -->
+
+<!-- Main Sidebar Container -->
+<?php require_once 'toolbar/sidebar.php'; ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -15,7 +20,7 @@
 
     <!-- Main content -->
     <section class="content">
-        
+
         <div class="container-fluid">
             <!-- Search & Filter -->
             <div class="card card-info card-outline">
@@ -58,7 +63,7 @@
                 </div>
                 <div class="card-body">
                     <!-- Control -->
-                        <?php include_once 'toolbar/toolbar.php';?>
+                    <?php include_once 'toolbar/toolbar.php'; ?>
                     <!-- List Content -->
                     <form action="" method="post" class="table-responsive" id="form-table">
                         <table class="table table-bordered table-hover text-nowrap btn-table mb-0">
@@ -87,14 +92,18 @@
                                         $username = $value['username'];
                                         $email = $value['email'];
                                         $fullname = $value['fullname'];
-                                        $status = Helper::cmsStatus($value['status'],
-                                                                    URL::createLink('admin','user','ajaxStatus',['id' => $id, 'status' => $value['status']]),
-                                                                    $id);
+                                        $status = Helper::cmsStatus(
+                                            $value['status'],
+                                            URL::createLink('admin', 'user', 'ajaxStatus', ['id' => $id, 'status' => $value['status']]),
+                                            $id
+                                        );
+                                        $editBtn = Helper::cmsBtnAction($type = 'edit', $link = URL::createLink('admin', 'user', 'form', ['id' => $id]));
+                                        $deleteBtn = Helper::cmsBtnAction($type = 'delete', $link = URL::createLink('admin', 'user', 'trash', ['id' => $id]));
                                 ?>
 
                                         <tr>
                                             <td class="text-center">
-                                                <?php echo $checkbox;?>
+                                                <?php echo $checkbox; ?>
                                             </td>
                                             <td class="text-center"><?php echo $id ?></td>
                                             <td class="text-center"><?php echo $username ?></td>
@@ -102,16 +111,12 @@
                                             <td class="text-center"><?php echo $email ?></td>
                                             <td class="text-center"><?php echo $fullname ?></td>
                                             <td class="text-center">
-                                                <?php echo $status;?>
+                                                <?php echo $status; ?>
                                             </td>
                                             <td class="text-center">
-                                                <a href="" class="rounded-circle btn btn-sm btn-info" title="Edit">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </a>
 
-                                                <a href="#" class="rounded-circle btn btn-sm btn-danger" title="Delete">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </a>
+                                                <?php
+                                                echo $editBtn . $deleteBtn; ?>
                                             </td>
                                         </tr>
                                 <?php

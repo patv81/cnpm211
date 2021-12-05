@@ -12,7 +12,12 @@ $inputSelectStatus = Helper::cmsSelectbox(
     $keySelect = $dataForm['status'],
     $style = null
 );
-
+$inputID        = '';
+$rowID            = '';
+if (isset($this->arrParam['id']) || $dataForm['id']) {
+    $inputID    = Helper::cmsInput($type='text', $name='form[id]',$id= 'form[id]', $value= $dataForm['id'], $class= 'form-control form-control-sm',$option='readonly');
+    $rowID        = Helper::cmsRowForm('ID', $inputID);
+}
 $inputToken = Helper::cmsInput($type = 'hidden', $name = 'form[token]', $id = 'form[token]', $value = time(), $class = '');
 //row
 $rowUserName = Helper::cmsRowForm('UserName', $inputUserName, true);
@@ -29,12 +34,20 @@ $linkSaveNew = URL::createLink('admin', 'user', 'form', array('type' => 'save-ne
 $btnSave = Helper::cmsButton('Save', $linkSave, 'btn btn-sm btn-success mr-1', 'submit');
 $btnSaveClose = Helper::cmsButton('Save &amp; Close', $linkSaveClose, 'btn btn-sm btn-success mr-1', 'submit');
 $btnSaveNew = Helper::cmsButton('Save &amp; New', $linkSaveNew, 'btn btn-sm btn-success mr-1', 'submit');
+$btnCancel = Helper::cmsButton('Cancel',URL::createLink('admin','user','index'), 'btn btn-sm btn-danger mr-1');
 ?>
+<!-- Navbar -->
+<?php require_once 'toolbar/navbar.php'; ?>
+<!-- /.navbar -->
+
+<!-- Main Sidebar Container -->
+<?php require_once 'toolbar/sidebar.php'; ?>
+
 <div class="content-wrapper">
     <?php
-    // echo '<pre>';
-    // print_r($this->test);
-    // echo '<pre>';
+        // echo '<pre>';
+        // print_r($this->arrParam);
+        // echo '<pre>';
     ?>
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -51,15 +64,15 @@ $btnSaveNew = Helper::cmsButton('Save &amp; New', $linkSaveNew, 'btn btn-sm btn-
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <?php 
-            echo $this->errors??'';
+            <?php
+            echo $this->errors ?? '';
             ?>
             <div class="card card-info card-outline">
                 <div class="card-body">
                     <form action="" method="post" class="mb-0" id="admin-form">
 
                         <?php
-                        echo $rowUserName . $rowEmail . $rowFullName . $rowPassword . $rowStatus . $inputToken;
+                        echo $rowUserName . $rowEmail . $rowFullName . $rowPassword . $rowStatus . $rowID .$inputToken;
                         ?>
 
                     </form>
@@ -67,8 +80,7 @@ $btnSaveNew = Helper::cmsButton('Save &amp; New', $linkSaveNew, 'btn btn-sm btn-
                 <div class="card-footer">
                     <div class="col-12 col-sm-8 offset-sm-2">
                         <?php
-                        echo $btnSave . $btnSaveClose . $btnSaveNew; ?>
-                        <a href="list.php" class="btn btn-sm btn-danger mr-1"> Cancel</a>
+                        echo $btnSave . $btnSaveClose . $btnSaveNew . $btnCancel; ?>
                     </div>
                 </div>
             </div>

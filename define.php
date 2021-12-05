@@ -25,7 +25,7 @@
 	define ('DB_TABLE'			, 'user');
 
 	
-
+define('TBL_USER', 'user');
 define('BASE_URL', 'http://mystore.com/cnpm211');
 
 // i search on google and find it.  it work good.

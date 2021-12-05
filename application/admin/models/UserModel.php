@@ -2,15 +2,24 @@
 class UserModel extends Model
 {
     protected $_columns=['id','username','email','fullname','password','created','created_by','modified','modified_by','status','ordering','group_id'];
-    protected $_tableName = 'user';
+    protected $_tableName = TBL_USER;
     public function __construct()
     {
         parent::__construct();
         $this->setTable($this->_tableName);
     }
 
+    public function infoItem($arrParam){
+        $query[]    = "SELECT `id`, `username`, `email`, `fullname`,`status`";
+        $query[]    = "FROM `$this->table`";
+        $query[]    = "WHERE `id`='".$arrParam['id']."'";
+        $query = implode(" ", $query);
+        $result = $this->singleRecord($query); 
+        return $result;
+    }
     public function listItems($arrPram=1,$options=1)
     {
+        
         // $query[]    = "SELECT `id`, `name`, `group_acp`, `status`, `ordering`, `created`, `created_by`, `modified`, `modified_by`";
         $query[]    = "SELECT `id`, `username`, `email`, `fullname`,`status`";
         $query[]    = "FROM `$this->table`";
@@ -53,6 +62,13 @@ class UserModel extends Model
         }
     }
     public function deleteItem($arrParam,$option=null){
+        if (isset($arrParam['id'])){ 
+            if (isset($arrParam['cid'])){
+                array_push($arrParam['cid'],$arrParam['id']);
+            }else{
+                $arrParam['cid'] = [$arrParam['id']];
+            }
+        }
         if (!empty($arrParam['cid'])){
             $ids = $this->createWhereDeleteSQL($arrParam['cid']);
             $query = "DELETE FROM `$this->table` WHERE `id` IN ($ids)"; //
@@ -67,6 +83,19 @@ class UserModel extends Model
             $this->insert($data);
             Session::set('message', array('class' => 'success', 'content' => 'Dữ liệu được lưu thành công!'));
             return $this->lastID();
+        }
+        if ($option['task'] == 'edit') {
+            $arrParam['form']['modified']    = date('Y-m-d', time());
+            $arrParam['form']['modified_by'] = 10;
+            if ($arrParam['form']['password'] != null) {
+                $arrParam['form']['password']    = md5($arrParam['form']['password']);
+            } else {
+                unset($arrParam['form']['password']);
+            }
+            $data    = array_intersect_key($arrParam['form'], array_flip($this->_columns));
+
+            $this->update($data, array(array('id', $arrParam['form']['id'])));
+            return $arrParam['form']['id'];
         }
     }
     
