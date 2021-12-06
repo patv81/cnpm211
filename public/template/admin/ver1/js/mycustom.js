@@ -26,6 +26,10 @@ function trashSingle(url){
     })
 }
 function bulkAction(){
+    var url_string= window.location.href;
+    var url = new URL(url_string);
+    var currentController = url.searchParams.get("controller");
+    console.log(currentController);
     var selected = [];
     var type = '';
     type = $('#bulk-action').val();
@@ -36,21 +40,35 @@ function bulkAction(){
     }) 
     if (type == 'multi-active'){
         var senddata = { type: 1, cid: selected };
-        $.post('index.php?module=admin&controller=user&action=status', senddata, function (data) {
+        $.post('index.php?module=admin&controller=' + currentController+'&action=status', senddata, function (data) {
             location.reload();
         }, 'json');
         
     } else if (type == 'multi-inactive'){
         var senddata = { type: 0, cid: selected };
-        $.post('index.php?module=admin&controller=user&action=status', senddata, function (data) {
+        $.post('index.php?module=admin&controller='+currentController+'&action=status', senddata, function (data) {
             location.reload();
         }, 'json');
         
     } else if (type == 'multi-delete'){
+        console.log('multi-delete');
         var senddata = {cid: selected };
-        $.post('index.php?module=admin&controller=user&action=trash', senddata, function (data) {
+        $.post('index.php?module=admin&controller='+currentController+'&action=trash', senddata, function (data) {
+            console.log('success')
             location.reload();
-        }, 'json');
+        }, 'json')
+        .done(function () {
+            console.log("second success");
+            location.reload();
+        })
+        .fail(function () {
+            console.log("error");
+            location.reload();
+        })
+        .always(function () {
+            console.log("finished");
+            location.reload();
+        });
     }
     
 }

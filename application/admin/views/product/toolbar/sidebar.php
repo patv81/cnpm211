@@ -1,7 +1,7 @@
 <?php
 
 $linkUserManager  = URL::createLink('admin', 'user', 'index');
-$linkOrderManager  = URL::createLink('admin', 'product', 'index');
+$linkProductManager  = URL::createLink('admin', 'product', 'index');
 ?>
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <!-- Brand Logo -->
@@ -14,13 +14,13 @@ $linkOrderManager  = URL::createLink('admin', 'product', 'index');
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="<?php echo $linkUserManager ;?>" class="nav-link active"  data-active="dashboard">
+                    <a href="<?php echo $linkUserManager; ?>" class="nav-link" data-active="user">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>User</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo $linkOrderManager ;?>" class="nav-link" data-active="category">
+                    <a href="<?php echo $linkProductManager; ?>" class="nav-link active" data-active="product">
                         <i class="nav-icon fas fa-thumbtack"></i>
                         <p>
                             Product

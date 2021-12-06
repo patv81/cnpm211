@@ -95,6 +95,7 @@ class UserController extends Controller
     //ACTION : TRASH ACTION 
     public function trashAction(){
         $this->_model->deleteItem($this->_arrParam);
+        echo "spam";
     }
     
 }
