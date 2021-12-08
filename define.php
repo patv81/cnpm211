@@ -27,6 +27,7 @@
 	
 define('TBL_USER', 'user');
 define('TBL_PRODUCT', 'product');
+define('TBL_SALE', 'cart');
 define('BASE_URL', 'http://mystore.com/cnpm211');
 
 // i search on google and find it.  it work good.

@@ -12,7 +12,7 @@ class Helper{
                     </a>';
     return $xhtml;
     }
-    public static function cmsBtnAction($type, $link)
+    public static function cmsBtnAction($type, $link='', $id=-1)
     {
         $xhtml ='';
         if ($type == 'delete'){
@@ -23,7 +23,17 @@ class Helper{
         else if ($type =='edit'){
             $xhtml.= '<a href="'.$link.'" class="rounded-circle btn btn-sm btn-info" title="edit">
                             <i class="fas fa-pencil-alt"></i>
-                      </a>';
+                      </a>'; 
+        }
+        else if($type== 'add-to-cart'){
+            $xhtml .= '<a data-product-id="' . $id . '"  onClick="' . $link . '" class="rounded-circle btn btn-sm btn-info" title="edit">
+                            <i class="fas fa-plus"></i>
+            </a>'; 
+        } 
+        else if ($type == 'remove-from-cart') {
+            $xhtml .= '<a data-product-id="'.$id.'" onClick="' . $link . '" class="rounded-circle btn btn-sm btn-info" title="edit">
+                            <i class="fas fa-plus"></i>
+            </a>';
         }
         return $xhtml;
     }

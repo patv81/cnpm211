@@ -1,8 +1,8 @@
-<?php require_once 'toolbar/navbar.php'; ?>
+<?php require_once __DIR__ . '/../toolbar/navbar.php'; ?>
 <!-- /.navbar -->
 
 <!-- Main Sidebar Container -->
-<?php require_once 'toolbar/sidebar.php'; ?>
+<?php require_once __DIR__ . '/../toolbar/sidebar.php'; ?>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -63,7 +63,7 @@
                 </div>
                 <div class="card-body">
                     <!-- Control -->
-                    <?php include_once 'toolbar/toolbar.php'; ?>
+                    <?php include_once __DIR__ .'/../toolbar/toolbar.php'; ?>
                     <!-- List Content -->
                     <form action="" method="post" class="table-responsive" id="form-table">
                         <table class="table table-bordered table-hover text-nowrap btn-table mb-0">

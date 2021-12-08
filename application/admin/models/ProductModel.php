@@ -17,19 +17,17 @@ class ProductModel extends Model
         $result = $this->singleRecord($query); 
         return $result;
     }
-    public function listItems($arrPram=1,$options=1)
+    public function listItems($arrParam,$options=null)
     {
-        
-        // $query[]    = "SELECT `id`, `name`, `group_acp`, `status`, `ordering`, `created`, `created_by`, `modified`, `modified_by`";
+
         $query[]    = "SELECT `id`, `name`, `price`";
         $query[]    = "FROM `$this->table`";
+        $query[]    = "WHERE `id` > 0";
 
         // FILTER : KEYWORD
-        $flagWhere     = false;
         if (!empty($arrParam['filter_search'])) {
             $keyword    = '"%' . $arrParam['filter_search'] . '%"';
-            $query[]    = "WHERE `name` LIKE $keyword";
-            $flagWhere     = true;
+            $query[]    = "AND `name` LIKE $keyword OR `id` LIKE $keyword";
         }
 
         $query  = implode(" ", $query);

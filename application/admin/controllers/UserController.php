@@ -16,6 +16,7 @@ class UserController extends Controller
         // echo '<h3>' . __METHOD__ . '</h3>';
         $this->_view->_title="User manager";
         $this->_view->Items= $this->_model->listItems();
+        $this->_view->arrParam = $this->_arrParam;
         $this->_view->render('user\index');
     }
     // EDIT & NEW page
@@ -42,25 +43,10 @@ class UserController extends Controller
             }
             $validate=new Validate($this->_arrParam['form']);
             $this->_view->test = $this->_arrParam;
-            echo '<pre>' ;
-            if ($requirePass==false) {
-                print_r('fasle');
-            }
-            else if
-            ($requirePass == true) {
-                print_r('true');
-            }
-            echo'<pre>';
             $validate->addRule('username', 'string-notExistRecord',array('min'=>3,'max'=>20, 'database' => $this->_model, 'query' => $queryUserName) )
             ->addRule('email','email-notExistRecord', array('database' => $this->_model, 'query' => $queryEmail))
             ->addRule('password', 'simplepassword',array('min'=>'3','max'=>16),$requirePass);
-            // ->addRule('password','password', array('action' => $task), false);
-            // echo '<pre>' ;
-            // print_r($validate); 
-            // echo '<br/>';
-            // die('function die was called');
-            // echo '<br/>';
-            // echo'<pre>';
+            
             $validate->run();
             $this->_arrParam['form']= $validate->getResult();
             if ($validate->isValid()==false) {

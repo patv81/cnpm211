@@ -1,5 +1,6 @@
 <?php
 $dataForm = $this->arrParam['form'];
+
 $inputUserName = Helper::cmsInput($type = 'text', $name = 'form[username]', $id = 'form[username]', $value = $dataForm['username'], $class = 'form-control form-control-sm');
 $inputEmail = Helper::cmsInput($type = 'text', $name = 'form[email]', $id = 'form[email]', $value = $dataForm['email'], $class = 'form-control form-control-sm');
 $inputFullName = Helper::cmsInput($type = 'text', $name = 'form[fullname]', $id = 'form[fullname]', $value = $dataForm['fullname'], $class = 'form-control form-control-sm');
@@ -15,7 +16,7 @@ $inputSelectStatus = Helper::cmsSelectbox(
 $inputID        = '';
 $rowID            = '';
 if (isset($this->arrParam['id']) || $dataForm['id']) {
-    $inputID    = Helper::cmsInput($type='text', $name='form[id]',$id= 'form[id]', $value= $dataForm['id'], $class= 'form-control form-control-sm',$option='readonly');
+    $inputID    = Helper::cmsInput($type = 'text', $name = 'form[id]', $id = 'form[id]', $value = $dataForm['id'], $class = 'form-control form-control-sm', $option = 'readonly');
     $rowID        = Helper::cmsRowForm('ID', $inputID);
 }
 $inputToken = Helper::cmsInput($type = 'hidden', $name = 'form[token]', $id = 'form[token]', $value = time(), $class = '');
@@ -34,20 +35,18 @@ $linkSaveNew = URL::createLink('admin', 'user', 'form', array('type' => 'save-ne
 $btnSave = Helper::cmsButton('Save', $linkSave, 'btn btn-sm btn-success mr-1', 'submit');
 $btnSaveClose = Helper::cmsButton('Save &amp; Close', $linkSaveClose, 'btn btn-sm btn-success mr-1', 'submit');
 $btnSaveNew = Helper::cmsButton('Save &amp; New', $linkSaveNew, 'btn btn-sm btn-success mr-1', 'submit');
-$btnCancel = Helper::cmsButton('Cancel',URL::createLink('admin','user','index'), 'btn btn-sm btn-danger mr-1');
+$btnCancel = Helper::cmsButton('Cancel', URL::createLink('admin', 'user', 'index'), 'btn btn-sm btn-danger mr-1');
 ?>
 <!-- Navbar -->
-<?php require_once 'toolbar/navbar.php'; ?>
+<?php require_once __DIR__ . '/../toolbar/navbar.php'; ?>
 <!-- /.navbar -->
 
 <!-- Main Sidebar Container -->
-<?php require_once 'toolbar/sidebar.php'; ?>
+<?php require_once __DIR__ . '/../toolbar/sidebar.php'; ?>
 
 <div class="content-wrapper">
     <?php
-        // echo '<pre>';
-        // print_r($this->arrParam);
-        // echo '<pre>';
+
     ?>
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -72,7 +71,7 @@ $btnCancel = Helper::cmsButton('Cancel',URL::createLink('admin','user','index'),
                     <form action="" method="post" class="mb-0" id="admin-form">
 
                         <?php
-                        echo $rowUserName . $rowEmail . $rowFullName . $rowPassword . $rowStatus . $rowID .$inputToken;
+                        echo $rowUserName . $rowEmail . $rowFullName . $rowPassword . $rowStatus . $rowID . $inputToken;
                         ?>
 
                     </form>

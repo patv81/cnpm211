@@ -16,7 +16,8 @@ class ProductController extends Controller
         // echo '<h3>' . __METHOD__ . '</h3>';
         $this->_view->_title="Product manager";
         
-        $this->_view->Items= $this->_model->listItems();
+        $this->_view->Items= $this->_model->listItems($this->_arrParam);
+        $this->_view->arrParam = $this->_arrParam;
         $this->_view->render('product\index');
     }
     // EDIT & NEW page
@@ -58,6 +59,11 @@ class ProductController extends Controller
     //ACTION : TRASH ACTION 
     public function trashAction(){
         $this->_model->deleteItem($this->_arrParam);
+    }
+    //API : GET LIST PRODUCT
+    public function getListProductAction(){
+        $result= $this->_model->listItems($this->_arrParam);
+        echo json_encode($result);
     }
     
 }
