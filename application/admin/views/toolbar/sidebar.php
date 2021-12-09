@@ -7,7 +7,7 @@ $classUser = 'user' == $controller ? 'nav-link active' : 'nav-link';
 $classProduct = 'product' == $controller ? 'nav-link active' : 'nav-link';
 $classSale = 'sale' == $controller ? 'nav-link active' : 'nav-link';
 ?>
-?>
+
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">

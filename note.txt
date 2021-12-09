@@ -1,0 +1,3 @@
+CNPM nhóm 48
+xamp 3.3.0
+vào myphp, tạo database "restaurant" import file restaurant(1).sql 

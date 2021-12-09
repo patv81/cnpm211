@@ -60,13 +60,13 @@ class ProductModel extends Model
         if ($option['task'] == 'edit') {
             $arrParam['form']['modified']    = date('Y-m-d', time());
             $arrParam['form']['modified_by'] = 10;
-            if ($arrParam['form']['password'] != null) {
-                $arrParam['form']['password']    = md5($arrParam['form']['password']);
-            } else {
-                unset($arrParam['form']['password']);
-            }
             $data    = array_intersect_key($arrParam['form'], array_flip($this->_columns));
-
+            // echo '<pre>' ;
+            // print_r($data); 
+            // echo'<pre>';
+            // echo '<br/>';
+            // die('function die was called123');
+            // echo '<br/>';
             $this->update($data, array(array('id', $arrParam['form']['id'])));
             return $arrParam['form']['id'];
         }

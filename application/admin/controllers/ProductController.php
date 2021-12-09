@@ -25,16 +25,24 @@ class ProductController extends Controller
 
         $this->_view->_title = "Product manager::Add";
         $this->_view->test= '';
+        
         if(isset($this->_arrParam['id'])){
             $this->_view->_title = "Product manager::Edit";
             $info = $this->_model->infoItem($this->_arrParam);
             $this->_arrParam['form'] = $info;
         }
-
-        if ($this->_arrParam['form']['token']>0){
+        // echo '<pre>';
+        // print_r($this->_arrParam);
+        // echo '<pre>';
+        // echo '<br/>';
+        // die('function die was called');
+        // echo '<br/>';
+        if (isset($this->_arrParam['form']['token']) && $this->_arrParam['form']['token']>0){
             $task='add';
             $validate=new Validate($this->_arrParam['form']);
-
+            if (isset($this->_arrParam['form']['id'])) {
+                $task = 'edit';
+            }
             $this->_view->test = $this->_arrParam;
 
             $validate->addRule('name', 'string',array('min'=>3,'max'=>500) )

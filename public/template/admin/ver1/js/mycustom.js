@@ -228,6 +228,19 @@ function bulkAction(){
     }
     
 }
+function createLink(exceptParams) {
+    let pathname = window.location.pathname;
+    let searchParams = new URLSearchParams(window.location.search);
+    let searchParamsEntries = searchParams.entries();
+
+    let link = pathname + '?';
+    for (let pair of searchParamsEntries) {
+        if (exceptParams.indexOf(pair[0]) == -1) {
+            link += `${pair[0]}=${pair[1]}&`;
+        }
+    }
+    return link;
+}
 $(document).ready(function(){
     $('#check-all').change(function(){
         var checkStatus = this.checked;
@@ -242,7 +255,20 @@ $(document).ready(function(){
     let $btnClearSearch = $('button#btn-clear-search');
     let $inputSearchValue = $('input[name = search_value]');
     $btnSearch.click(function(){
-        alert(123);
+        // location.reload();
+        console.log("123");
+        let searchValue = $inputSearchValue.val().trim();
+        let searchField = $('.select-search-field').val();
+        if (searchValue != '') {
+            let exceptParams = ['search_value'];
+            let link = createLink(exceptParams);
+            link +=
+                'search_field=' +
+                searchField +
+                searchValue.replace(/\s+/g, '+').toLowerCase();
+            alert(link);
+            window.location.href = link;
+        }
     })
     $btnClearSearch.click(function () {
         $inputSearchValue.val('');
